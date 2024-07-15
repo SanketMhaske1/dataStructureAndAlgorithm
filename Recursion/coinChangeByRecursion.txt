@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int fewestCoin(vector<int>& coins, int amount) {
+        if (amount == 0)
+            return 0;
+
+        int ans = INT_MAX;
+        int mini = INT_MAX;
+        for (int i = 0; i < coins.size(); i++) {
+            int coin = coins[i];
+            if (coin <= amount) {
+                int recAns = fewestCoin(coins, amount - coin);
+                if (recAns != INT_MAX)
+                    ans = 1 + recAns;
+            }
+            mini = min(mini, ans);
+        }
+
+        return mini;
+    }
+
+    int coinChange(vector<int>& coins, int amount) {
+        int mini = fewestCoin(coins, amount);
+        return mini == INT_MAX ? -1 : mini;
+    }
+};

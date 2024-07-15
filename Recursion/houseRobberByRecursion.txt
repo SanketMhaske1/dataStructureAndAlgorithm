@@ -1,0 +1,20 @@
+class Solution {
+public:
+
+    int maxrob(vector<int>& nums,int index){
+        if(index>=nums.size())
+            return 0;
+        
+        int first = nums[index]+maxrob(nums,index+2);
+        int second = 0+maxrob(nums,index+1);
+
+        return max(first,second);
+    }
+
+    int rob(vector<int>& nums) {
+        return maxrob(nums,0);
+    }
+};
+
+Time Complexity = O(2^n)
+space Complexity = O(n)
