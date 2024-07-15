@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+int binarySearch(int *arr, int s, int e, int target) {
+    if (s > e)
+        return -1;
+    
+    int mid = s + (e - s) / 2;
+    
+    if (arr[mid] == target)
+        return mid;
+    else if (arr[mid] > target)
+        return binarySearch(arr, s, mid - 1, target);
+    else
+        return binarySearch(arr, mid + 1, e, target);
+}
+
+int main() {
+    int n;
+    cout << "Enter Size OF Array --> ";
+    cin >> n;
+    cout << endl << "Enter Elements OF Array --> ";
+
+    int arr[n];
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
+    
+    int target;
+    cout << endl << "Enter Target --> ";
+    cin >> target;
+    
+    int index = binarySearch(arr, 0, n - 1, target);
+    if (index != -1)
+        cout << "Index Of Target Element: " << index;
+    else
+        cout << "Target Element Not Present";
+
+    return 0;
+}
+
+
+Time Complexity = O(logn)
+Space Complexity = O(logn)

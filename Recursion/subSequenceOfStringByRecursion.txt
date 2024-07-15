@@ -1,0 +1,39 @@
+n length string can make 2^n substring
+
+#include <iostream>
+using namespace std;
+
+void subSequenceOfString(string input,string temp,int index) {
+    
+    if(index >= input.size()){
+        cout<<"-->"<<temp<<endl;
+        return;
+    }
+    char ch = input[index];
+    // include
+    temp.push_back(ch);
+    subSequenceOfString(input,temp,index+1);
+    
+    // exlude
+    temp.pop_back();
+    subSequenceOfString(input,temp,index+1);
+
+
+    
+}
+
+int main() {
+
+    string input;
+    cout << "Enter the string: ";
+    cin>>input;
+    string temp="";
+    cout << "Subsequences of the string are:\n";
+    subSequenceOfString(input,temp,0);
+
+    return 0;
+}
+
+
+Time Complexity: O(2^n)
+Space Complexity: O(n)
