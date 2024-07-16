@@ -1,0 +1,54 @@
+// brute force solution
+
+int pivotIndex(vector<int>& nums) {
+
+        int n = nums.size();
+
+        for(int i=0;i<n;i++){
+            int leftSum=0;
+            int rightSum=0;
+
+            for(int j=0;j<i;j++)
+                leftSum+=nums[j];
+                
+            for(int j=i+1;j<n;j++)
+                rightSum+=nums[j];
+
+            if(leftSum==rightSum)
+                return i;
+        }
+
+        return -1;
+        
+    }
+
+Time Complexity = O(n^2)
+Space Complexity = O(1)
+
+
+int pivotIndex(vector<int>& nums) {
+
+        int n = nums.size();
+        vector<int>leftSum(n,0);
+        vector<int>rightSum(n,0);
+
+        for(int i=1;i<n;i++){
+            leftSum[i] = leftSum[i-1]+nums[i-1];
+        }
+
+        
+        for(int i=n-2;i>=0;i--){
+            rightSum[i] = rightSum[i+1]+nums[i+1];
+        }
+
+        for(int i=0;i<n;i++){
+            if(leftSum[i]==rightSum[i])
+                return i;
+        }
+
+        return -1;
+
+        
+    }
+Time Complexity = O(n)
+Space Complexity = O(n)

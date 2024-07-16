@@ -1,0 +1,81 @@
+		sort Colors
+-----------------------------------------
+
+// brute force solution
+
+void sortColors(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+    }
+
+Time Complexity = O(nlogn)
+Space Complexity = O(1)
+
+------------------------------------------
+
+// Average Solution
+
+void sortColors(vector<int>& nums) {
+        int zeroCount=0;
+        int oneCount=0;
+        int twoCount=0;
+        int n = nums.size();
+
+        for(int i=0;i<n;i++){
+            nums[i]==0?zeroCount++:(nums[i]==1?oneCount++:twoCount++);
+        }
+
+        int i=0;
+
+        while(zeroCount != 0){
+            nums[i]=0;
+            i++;
+            zeroCount--;
+        }
+
+        while(oneCount != 0){
+            nums[i]=1;
+            i++;
+            oneCount--;
+        }
+
+        while(twoCount != 0){
+            nums[i]=2;
+            i++;
+            twoCount--;
+        }
+    }
+
+Time Complexity = O(n)
+Space Complexity = O(1)
+
+-----------------------------------------------------------------------
+
+
+// Best Solution (dutch national flag algorithm)
+
+void sortColors(vector<int>& nums) {
+
+        int n =0;
+        int high = nums.size()-1;
+        int low = 0;
+        int mid = 0;
+
+        while(mid<=high){
+            if(nums[mid]==2){
+                swap(nums[mid],nums[high]);
+                high--;
+            }
+            else if(nums[mid]==1){
+                mid++;
+            }
+            else{
+                swap(nums[low],nums[mid]);
+                low++;
+                mid++;
+            }
+        }
+        
+    }
+
+Time Complexity = O(n)
+Space Complexity = O(1)
